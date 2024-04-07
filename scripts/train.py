@@ -32,7 +32,11 @@ from tqdm import tqdm
 try:
     from apex.contrib.sparsity import ASP
 except:
-    pass
+    print("ASP not support, you should install nvidia-apex")
+try:
+    from utils.qat_util import QAT
+except:
+    print("qat not support, you should install pytorch_quantization")
 
 FILE = Path(__file__).resolve()
 ROOT = FILE.parents[0]  # YOLOv5 root directory
@@ -58,7 +62,7 @@ from od import ComputeLoss
 from utils.metrics import fitness
 from utils.plots import plot_evolve, plot_labels
 from utils.torch_utils import EarlyStopping, ModelEMA, de_parallel, select_device, torch_distributed_zero_first
-from utils.qat_util import QAT
+
 LOCAL_RANK = int(os.getenv('LOCAL_RANK', -1))  # https://pytorch.org/docs/stable/elastic/run.html
 RANK = int(os.getenv('RANK', -1))
 WORLD_SIZE = int(os.getenv('WORLD_SIZE', 1))
