@@ -32,10 +32,12 @@ from tqdm import tqdm
 try:
     from apex.contrib.sparsity import ASP
 except:
+    ASP = None
     print("ASP not support, you should install nvidia-apex")
 try:
     from utils.qat_util import QAT
 except:
+    QAt = None
     print("qat not support, you should install pytorch_quantization")
 
 FILE = Path(__file__).resolve()
@@ -190,6 +192,9 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
     
     # sparsity
     if opt.sparsity:
+        if ASP is None:
+            print("please install nvidia-apex lib")
+            sys.exit()
         ASP.init_model_for_pruning(model, mask_calculator='m4n2_1d', verbosity=2, whitelist=[torch.nn.Linear, torch.nn.Conv2D],
                                    allow_recompute_mask=True, disallowed_layer_names=opt.sparsity_ignore_names, allow_permutation=False)
         ASP.init_optimizer_for_pruning(optimizer)
@@ -316,6 +321,9 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
                 f"Logging results to {colorstr('bold', save_dir)}\n"
                 f'Starting training for {epochs} epochs...')
     if opt.qat:
+        if QAT is None:
+            print("please install pytorch_quantization lib")
+            sys.exit()
         QAT(model, train_loader, calibrate_step=opt.calibrate_step).qat()
     for epoch in range(start_epoch, epochs):  # epoch ------------------------------------------------------------------
         callbacks.run('on_train_epoch_start')
