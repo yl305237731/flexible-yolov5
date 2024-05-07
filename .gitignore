@@ -3,3 +3,5 @@ __pycache__/
 utils/PaxHeader/
 results/
 weights/
+roboflow.zip
+dataset/
