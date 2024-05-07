@@ -1,12 +1,16 @@
 # Custom data for person detection
 
-
 # train and val data as 1) directory: path/images/, 2) file: path/images.txt, or 3) list: [path1/images/, path2/images/]
-train: dataset/person_count/images/train
-val: dataset/person_count_val/images/train
+train: ./dataset/train/images/
+val: ./dataset/valid/images/
+test: ./dataset/test/images/
 
-# number of classes
 nc: 1
+names: ["person"]
 
-# class names
-names: ['person']
+roboflow:
+    workspace: mohamed-traore-2ekkp
+    project: people-detection-general
+    version: 8
+    license: CC BY 4.0
+    url: https://universe.roboflow.com/mohamed-traore-2ekkp/people-detection-general/dataset/8

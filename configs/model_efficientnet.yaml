@@ -1,17 +1,17 @@
 backbone:
-  type: efficientnet
-  version: b1 # b1 to b8 and l2
+    type: efficientnet
+    version: b1 # b1 to b8 and l2
 neck:
-  FPN:
-    channel_outs: [512, 256, 256]
-    version: s
-  PAN:
-    channel_outs: [256, 512, 512, 1024]
-    version: s
+    FPN:
+        channel_outs: [512, 256, 256]
+        version: s
+    PAN:
+        channel_outs: [256, 512, 512, 1024]
+        version: s
 head:
-  nc: 80
-  stride: [8.0, 16.0, 32.0]
-  anchors:
-    - [10,13, 16,30, 33,23]  # P3/8
-    - [30,61, 62,45, 59,119]  # P4/16
-    - [116,90, 156,198, 373,326]  # P5/32
+    nc: 1
+    stride: [8.0, 16.0, 32.0]
+    anchors:
+        - [10, 13, 16, 30, 33, 23] # P3/8
+        - [30, 61, 62, 45, 59, 119] # P4/16
+        - [116, 90, 156, 198, 373, 326] # P5/32
