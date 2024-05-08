@@ -5,3 +5,4 @@ results/
 weights/
 roboflow.zip
 dataset/
+attempts/*
